@@ -13,9 +13,11 @@ export default function Home() {
   return (
     <>
       <div className="flex h-screen bg-gray-800 text-white">
-        <Sidebar />
-        <MainContent />
-        <RightPanel />
+        <div className="flex w-full min-w-[1088px]">
+          <Sidebar />
+          <MainContent />
+          <RightPanel />
+        </div>
       </div>
 
       <Modal
