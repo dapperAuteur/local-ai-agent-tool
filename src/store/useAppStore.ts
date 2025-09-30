@@ -7,6 +7,7 @@ import { OllamaModel } from '@/lib/ollama/types';
 import { ChatMessage, Agent } from '@/lib/types';
 import { v4 as uuidv4 } from 'uuid';
 import { persist, createJSONStorage } from 'zustand/middleware';
+import { exportAgentAsJson } from '@/lib/utils';
 
 // Define the structure of our application's state
 interface AppState {
@@ -32,6 +33,7 @@ interface AppState {
   addAgent: (agent: { name: string; systemPrompt: string }) => void;
   openNewAgentModal: () => void;
   closeNewAgentModal: () => void;
+  exportActiveAgent: () => void;
 }
 
 export const useAppStore = create<AppState>()(
@@ -62,6 +64,15 @@ export const useAppStore = create<AppState>()(
   addAgent: ({ name, systemPrompt }) => {
     const newAgent: Agent = { id: uuidv4(), name, systemPrompt };
     set((state) => ({ agents: [...state.agents, newAgent] }));
+  },
+  exportActiveAgent: () => {
+    const { agents, activeAgentId } = get();
+    const activeAgent = agents.find(agent => agent.id === activeAgentId);
+    if (activeAgent) {
+      exportAgentAsJson(activeAgent);
+    } else {
+      console.error("No active agent to export.");
+    }
   },
 
   /**

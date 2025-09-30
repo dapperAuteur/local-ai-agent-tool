@@ -1,7 +1,7 @@
 'use client'; // This component now uses hooks, so it must be a client component.
 
 import { FC } from 'react';
-import { Cog, FileText, AlertTriangle, Loader } from 'lucide-react';
+import { Cog, FileText, AlertTriangle, Loader, Download } from 'lucide-react';
 import { useAppStore } from '@/store/useAppStore';
 
 const RightPanel: FC = () => {
@@ -15,6 +15,7 @@ const RightPanel: FC = () => {
 
   // Find the currently active agent to display its system prompt
   const activeAgent = agents.find((agent) => agent.id === activeAgentId);
+  const exportActiveAgent = useAppStore((state) => state.exportActiveAgent);
 
   const renderModelSelector = () => {
     switch (ollamaConnectionStatus) {
@@ -60,6 +61,15 @@ const RightPanel: FC = () => {
           <Cog size={20} />
           Configuration
         </h2>
+        <button
+          onClick={exportActiveAgent}
+          disabled={!activeAgent}
+          className="flex items-center gap-2 rounded-md border border-gray-600 px-3 py-1.5 text-xs text-gray-300 transition-colors hover:border-indigo-500 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+          title={activeAgent ? "Export this agent" : "No active agent to export"}
+        >
+          <Download size={14} />
+          Export
+        </button>
       </div>
       {/* ... (rest of the component is unchanged) */}
       <div className="space-y-6">
