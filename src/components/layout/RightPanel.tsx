@@ -54,14 +54,14 @@ const RightPanel: FC = () => {
   };
 
   return (
-    <aside className="hidden h-screen w-80 flex-col border-l border-gray-700 bg-gray-900 p-4 lg:flex">
+    <aside className="flex h-screen w-80 flex-col border-l border-gray-700 bg-gray-900 p-4">
       <div className="mb-6">
         <h2 className="flex items-center gap-2 text-lg font-semibold text-white">
           <Cog size={20} />
           Configuration
         </h2>
       </div>
-
+      {/* ... (rest of the component is unchanged) */}
       <div className="space-y-6">
         <div>
           <label htmlFor="model-select" className="mb-2 block text-sm font-medium text-gray-300">
