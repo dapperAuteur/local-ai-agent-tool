@@ -1,10 +1,30 @@
+'use client';
+
+import Sidebar from '@/components/layout/Sidebar';
+import MainContent from '@/components/layout/MainContent';
+import RightPanel from '@/components/layout/RightPanel';
+import Modal from '@/components/ui/Modal';
+import NewAgentForm from '@/components/agent/NewAgentForm';
+import { useAppStore } from '@/store/useAppStore';
+
 export default function Home() {
+  const isNewAgentModalOpen = useAppStore((state) => state.isNewAgentModalOpen);
+  const closeNewAgentModal = useAppStore((state) => state.closeNewAgentModal);
   return (
-    <main className="flex min-h-screen items-center justify-center">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold text-indigo-400">Local AI Agent Tool</h1>
-        <p className="mt-2 text-gray-400">Initializing project setup...</p>
+    <>
+      <div className="flex h-screen bg-gray-800 text-white">
+        <Sidebar />
+        <MainContent />
+        <RightPanel />
       </div>
-    </main>
+
+      <Modal
+        isOpen={isNewAgentModalOpen}
+        onClose={closeNewAgentModal}
+        title="Create New AI Agent"
+      >
+        <NewAgentForm />
+      </Modal>
+    </>
   );
 }

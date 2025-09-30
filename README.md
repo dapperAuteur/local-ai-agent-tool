@@ -6,10 +6,20 @@ The Local AI Agent Tool is a desktop and web application designed for power user
 
 This application runs entirely on your local machine, ensuring that your data, prompts, and conversations never leave your device.
 
+## Features (MVP v1.0.0)
+
+- **Privacy First**: All data, including agent configurations and chat history, remains on the user's machine.
+- **Agent Management**: Create, save, and switch between multiple AI agent personas.
+- **File-Based Prompts**: Define agent behavior by uploading `.txt` instruction files.
+- **Local Model Support**: Connects to a local Ollama server and allows selection from any available model.
+- **Markdown & Code Support**: Renders chat responses with proper Markdown formatting and syntax highlighting for code blocks.
+
 ## Technology Stack
 
 - **Framework**: [Next.js](https://nextjs.org/) with TypeScript
 - **UI Library**: [React](https://reactjs.org/)
+- **State Management**: Zustand
+- **UI Components**: Radix UI (for modals), Lucide Icons
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **LLM Service**: [Ollama](https://ollama.com/) (must be installed and running separately)
 - **Desktop Packaging (Future)**: [Electron](https://www.electronjs.org/)
@@ -21,28 +31,35 @@ This application runs entirely on your local machine, ensuring that your data, p
 - **Intuitive Workflow**: Provide a clean and efficient UI for managing agents, models, and conversations.
 - **Portability**: Allow the tool to be run from a flash drive or as a standalone desktop application.
 
-## Getting Started (Development)
+## Getting Started
 
 ### Prerequisites
 
-- **Node.js**: Ensure you have Node.js (v18 or later) installed.
-- **Ollama**: You must have [Ollama installed](https://ollama.com/download) and running on your machine.
-- **Pull a Model**: Download at least one model through Ollama.  
-    ollama pull llama3  
+1.  **Node.js**: Ensure you have Node.js v18+ installed.
+2.  **Ollama**: You must have the [Ollama desktop application](https://ollama.com/) installed and running on your machine.
+3.  **LLM Models**: Pull at least one model through Ollama (e.g., `ollama run llama3`).
 
-### Installation
+### Installation & Running
 
-- Clone the repository:  
-    git clone &lt;repository_url&gt;  
-    cd local-ai-agent-tool  
+1.  **Clone the repository:**
+    ```bash
+    git clone <your-repo-url>
+    cd local-ai-agent-tool
+    ```
 
-- Install dependencies:  
-    npm install  
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
 
-- Run the development server:  
-    npm run dev  
+3.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
 
-Open [http://localhost:3000](https://www.google.com/search?q=http://localhost:3000) with your browser to see the result.
+4.  **Open the application:**
+    Open [http://localhost:3000](http://localhost:3000) in your browser to use the application.
+
 
 ## Coding Standards
 
