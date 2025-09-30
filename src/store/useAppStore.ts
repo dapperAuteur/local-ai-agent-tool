@@ -7,7 +7,7 @@ import { OllamaModel } from '@/lib/ollama/types';
 import { ChatMessage, Agent } from '@/lib/types';
 import { v4 as uuidv4 } from 'uuid';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { exportAgentAsJson } from '@/lib/utils';
+import { exportAgentAsJson, exportChatHistoryAsMarkdown } from '@/lib/utils';
 
 // Define the structure of our application's state
 interface AppState {
@@ -34,6 +34,7 @@ interface AppState {
   openNewAgentModal: () => void;
   closeNewAgentModal: () => void;
   exportActiveAgent: () => void;
+  exportActiveChatHistory: () => void;
 }
 
 export const useAppStore = create<AppState>()(
@@ -74,14 +75,24 @@ export const useAppStore = create<AppState>()(
       console.error("No active agent to export.");
     }
   },
-
+  /**
+   * Exports the current chat history for the active agent as a Markdown file.
+   */
+  exportActiveChatHistory: () => {
+    const { agents, activeAgentId, messages } = get();
+    const activeAgent = agents.find(agent => agent.id === activeAgentId);
+    if (activeAgent && messages.length > 0) {
+      exportChatHistoryAsMarkdown(activeAgent, messages);
+    } else {
+      console.error("No active agent or chat history to export.");
+    }
+  },
   /**
    * Sets the currently active agent.
    */
   setActiveAgent: (agentId: string) => {
     set({ activeAgentId: agentId, messages: [] }); // Clear messages when switching agents
   },
-
   /**
    * Sets the model to be used for chat completions.
    */
